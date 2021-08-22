@@ -25,4 +25,8 @@ void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
 int _putchar(char c);
 void rev_string(char *s);
 int _strlen(char *s);
+
+/*util2 file*/
+int _puts(char *str);
+
 #endif
