@@ -1,5 +1,6 @@
 #include "holberton.h"
 
+int blt_execute(char **args);
 char **linecut(char *line);
 
 int main(void)
@@ -31,17 +32,18 @@ int shellcore(void)
 		stat = com_execute(args);
 		printf("TEST2\n");
 		i++;
-		if (args != NULL)
-		{
-			printf("free%s\n", *(args));
-			free(args);
-		}
-		args = NULL;
 		if (line != NULL)
 		{
 			printf("free%s\n", line);
 			free(line);
 		}
+
+		if (args != NULL)
+		{
+			/*printf("free%s\n", *(args));*/
+			free(args);
+		}
+		args = NULL;
 		line = NULL;
 	}
 	return (stat);
@@ -85,27 +87,53 @@ char **linecut(char *line)
    }
  */
 
+int blt_execute(char **args)
+{
+	int i = 0, stat = -1;
+	builtin_t builts[] = {
+		{"exit", builtin_exit},
+		{NULL, NULL},
+	};
+
+	while (builts[i].builtin != NULL)
+	{
+		if (!(_strcmp(args[0], builts[i].prog)))
+		{
+			stat = (builts[i].builtin)(args);
+			break;
+		}
+	}
+
+	return (stat);
+}
+
 int com_execute(char **arg)
 {
 	pid_t pcs;
 	int stat = 0;
 
-	pcs = fork();
-	if (!pcs)
-	{
-		stat = execve(arg[0], arg, NULL);
-		/*if (stat == -1)
-		  perror("error with execve\n");*/
-		exit(stat);
-	}
-	/*else if (pcs < 0)
-	  perror("error forking\n");*/
-	else
-	{
-		do {
-			waitpid(pcs, &stat, WUNTRACED);
-		} while (!WIFEXITED(stat) && !WIFSIGNALED(stat));
-	}
+	stat = blt_execute(arg)
+		if (stat < 0)
+		{
 
-	return (1);
+			pcs = fork();
+			if (!pcs)
+			{
+				stat = execve(arg[0], arg, NULL);
+				/*if (stat == -1)
+				  perror("error with execve\n");*/
+				free(arg[0]);
+				free(arg);
+				exit(stat);
+			}
+			/*else if (pcs < 0)
+			  perror("error forking\n");*/
+			else
+			{
+				do {
+					waitpid(pcs, &stat, WUNTRACED);
+				} while (!WIFEXITED(stat) && !WIFSIGNALED(stat));
+			}
+		}
+	return (stat);
 }
