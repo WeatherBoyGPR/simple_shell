@@ -22,7 +22,8 @@ typedef struct builtin
 /*shell files*/
 int shellcore(void);
 int line_read(void);
-char **_strtok(char *imt);
+char **linecut(char *line);
+int blt_execute(char **args);
 int com_execute(char **arg);
 
 /*util1 file*/
@@ -36,4 +37,6 @@ int _strlen(char *s);
 int _puts(char *str);
 int _strcmp(char *s1, char *s2);
 
+/*builtin file*/
+int builtin_exit(char **args);
 #endif

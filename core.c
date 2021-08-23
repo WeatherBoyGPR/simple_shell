@@ -1,8 +1,5 @@
 #include "holberton.h"
 
-int blt_execute(char **args);
-char **linecut(char *line);
-
 int main(void)
 {
 	int ret;
@@ -94,7 +91,7 @@ int blt_execute(char **args)
 		{"exit", builtin_exit},
 		{NULL, NULL},
 	};
-
+printf("TEST\n");
 	while (builts[i].builtin != NULL)
 	{
 		if (!(_strcmp(args[0], builts[i].prog)))
