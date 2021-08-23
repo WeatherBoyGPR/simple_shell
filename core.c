@@ -99,6 +99,7 @@ printf("TEST\n");
 			stat = (builts[i].builtin)(args);
 			break;
 		}
+		i++;
 	}
 
 	return (stat);
