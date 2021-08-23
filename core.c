@@ -109,7 +109,7 @@ int com_execute(char **arg)
 	pid_t pcs;
 	int stat = 0;
 
-	stat = blt_execute(arg)
+	stat = blt_execute(arg);
 		if (stat < 0)
 		{
 
