@@ -47,6 +47,32 @@ int shellcore(void)
 	return (stat);
 }
 
+char **linecut(char *line)
+{
+	char **args = NULL;
+	int i = 0, size = 1;
+
+	do {
+		if (args == NULL)
+		{
+			args = malloc(sizeof(char **) * size);
+			if (args == NULL)
+				return (NULL);
+			args[i] = strtok(line, " \n\t");
+		}
+		else
+		{
+			args = _realloc(args, sizeof(char **) * (size - 1), sizeof(char **) * size);
+			if (args == NULL)
+				return(NULL);
+			args[i] = strtok(NULL, " \n\t");
+		}
+		i++, size++;
+	} while (args[i - 1] != NULL);
+
+	return (args);
+}
+
 /*
    int line_read(void)
    {
