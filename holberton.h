@@ -13,6 +13,12 @@
 #include <sys/resource.h>
 #include <sys/wait.h>
 
+typedef struct builtin
+{
+	char *prog;
+	int (*builtin)(char **args);
+} builtin_t;
+
 /*shell files*/
 int shellcore(void);
 int line_read(void);
@@ -28,5 +34,6 @@ int _strlen(char *s);
 
 /*util2 file*/
 int _puts(char *str);
+int _strcmp(char *s1, char *s2);
 
 #endif
