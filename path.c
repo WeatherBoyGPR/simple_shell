@@ -1,6 +1,6 @@
 #include "holberton.h"
 /**
- * dpath - link comm to path
+ * dpath - link to path 
  * @ctl: command to link
  *
  * Return: An array of strings
