@@ -1,0 +1,40 @@
+.TH simple_shell 
+.SH NAME
+.B simple_shell
+- UNIX command line interpreter.
+
+.SH SYNOPSIS
+.B ./hsh
+- [option_name] [command_file]
+
+.SH DESCRIPTION
+
+.B Simple shell
+it is a simple version of a command line interpreter for the system. The simple shell read lines from either the terminal, interpretes them, and generally executes other commands. It incorporates mode interactive and non-interactive, the commands can be executed while the program is running or can be executing a command within a file directly by the shell.
+
+.SS INVOCATION
+
+To start the interactive mode the program will be executed, then starts the mode indicated by '$', to exit of the mode type 'exit' or type 'ctrl + d' and in the mode non-interactive the location that contains the command to be executed must be specified in the command line.
+
+.SS EXECUTION
+
+The program takes the arguments of the command line in a string and it is tokenizes into words using "space" as a delimiter, the first word is consider the command and all remaining are considered the arguments to that command. If the command is valid:
+
+1. If the first argument is different to '.', '/' or shell builtin, the program searches in the PATH and then invocates it.
+2. If the first character is '.' or '/', the program executes that typed command with the passed argument.
+
+.SH SEE ALSO
+
+psh(1), environ(7), ksh(1), test(1)
+
+.SS Command Exit status 
+
+The Exit command status could vary depending of the typed command and his behavior, in the caso of a builtin command return exit codes, as does an executed shell function.
+
+.SS EXIT STATUS
+
+Errors that are detected by the shell, such a syntax error, will cause an exit specifying that file or directory does not exist. If a type a command with a syntax error, the output specifies 'No such file or directory'. 
+
+.SH BUGS
+
+isos chaotic commits

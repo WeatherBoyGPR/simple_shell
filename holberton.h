@@ -13,10 +13,17 @@
 #include <sys/resource.h>
 #include <sys/wait.h>
 
+typedef struct builtin
+{
+	char *prog;
+	int (*builtin)(char **args);
+} builtin_t;
+
 /*shell files*/
 int shellcore(void);
 int line_read(void);
-char **_strtok(char *imt);
+char **linecut(char *line);
+int blt_execute(char **args);
 int com_execute(char **arg);
 /*PATH*/
 char **dir_path(char *cmd);
@@ -26,4 +33,11 @@ void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
 int _putchar(char c);
 void rev_string(char *s);
 int _strlen(char *s);
+
+/*util2 file*/
+int _puts(char *str);
+int _strcmp(char *s1, char *s2);
+
+/*builtin file*/
+int builtin_exit(char **args);
 #endif
