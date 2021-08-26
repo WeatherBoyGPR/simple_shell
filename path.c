@@ -8,6 +8,8 @@
  */
 char **dpath(char *ctl)
 {
+	if (ctl == NULL)
+		return (1);
 	return (0);
 	/*
 	 *	char *path, *tok, *sub_dir, **dir;
