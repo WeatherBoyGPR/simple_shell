@@ -1,5 +1,10 @@
 #include "holberton.h"
 
+/**
+ * main - main for the simple shell program
+ *
+ * Return: nothing
+ */
 int main(void)
 {
 	int ret;
@@ -9,13 +14,19 @@ int main(void)
 	return (ret);
 }
 
+/**
+ * shellcore - is the core loop of the shell
+ *
+ * Return: shell ending status
+ */
 int shellcore(void)
 {
-	char *line = NULL, *prompt = "($) ";
+	char *line = NULL, *prompt = "($)";
 	char **args = NULL;
 	int stat = 0, cont[] = {1, 0}, i = 0;
 	size_t len = 0;
 
+	/*signal(SIGQUIT, SIG_IGN);*/
 	while (cont[0])
 	{
 		_puts(prompt);
@@ -46,6 +57,12 @@ int shellcore(void)
 	return (stat);
 }
 
+/**
+ * linecut - will cut a line into different arguments
+ * @line: line to be cut into arguments
+ *
+ * Return: two dimensional array containing arguments
+ */
 char **linecut(char *line)
 {
 	char **args = NULL;
@@ -63,7 +80,7 @@ char **linecut(char *line)
 		{
 			args = _realloc(args, sizeof(char **) * (size - 1), sizeof(char **) * size);
 			if (args == NULL)
-				return(NULL);
+				return (NULL);
 			args[i] = strtok(NULL, " \n\t");
 		}
 		i++, size++;
@@ -73,17 +90,23 @@ char **linecut(char *line)
 }
 
 /*
-   int line_read(void)
-   {
-
-   }
-
-   char **_strtok(char *imt)
-   {
-
-   }
+ *   int line_read(void)
+ *   {
+ *
+ *   }
+ *
+ *  char **_strtok(char *imt)
+ *   {
+ *
+ *   }
  */
 
+/**
+ * blt_execute - will execute builtin functions
+ * @args: pointer array containing arguments
+ *
+ * Return: status number of called function, -1 on failure
+ */
 int blt_execute(char **args)
 {
 	int i = 0, stat = -1;
@@ -105,6 +128,12 @@ int blt_execute(char **args)
 	return (stat);
 }
 
+/**
+ * com_execute - will execute programs
+ * @arg: array which contains program name and arguments
+ *
+ * Return: status number of executed program
+ */
 int com_execute(char **arg)
 {
 	pid_t pcs;
@@ -118,14 +147,14 @@ int com_execute(char **arg)
 		if (!pcs)
 		{
 			stat = execve(arg[0], arg, NULL);
-			/*if (stat == -1)
-			  perror("error with execve\n");*/
+			if (stat == -1)
+				perror("No such file or directory\n");
 			free(arg[0]);
 			free(arg);
 			exit(stat);
 		}
-		/*else if (pcs < 0)
-		  perror("error forking\n");*/
+		else if (pcs < 0)
+			perror("error forking\n");
 		else
 		{
 			do {
