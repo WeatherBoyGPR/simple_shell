@@ -7,7 +7,9 @@
  */
 char **dpath(char *ctl)
 {
-	char *path, *tok, *sub_dir, **dir;
+	printf("%s\n", ct1);
+	return (0);
+/*	char *path, *tok, *sub_dir, **dir;
 	int count = 1, i = 0;
 
 	path = genv("PATH");
@@ -29,5 +31,5 @@ char **dpath(char *ctl)
 	}
 	free(path);
 	dir[count] = NULL;
-	return (dir);
+	return (dir);*/
 }
