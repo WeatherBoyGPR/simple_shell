@@ -32,12 +32,10 @@ To use this shell first	of all you must	clone this repository, using the next c 
 
 `git clone https://github.com/isomora/simple_shell.git
 ## How to compile it:
+gcc -Wall -Werror -Wextra -pedantic -std=gnu89 *.c -o hsh
 
 
 
-## How to use it:
 
 
-```
 
-**Designed by Isaac Morales
