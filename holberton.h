@@ -13,6 +13,11 @@
 #include <sys/resource.h>
 #include <sys/wait.h>
 
+/**
+ * struct builtin - ties together builtin names and functions
+ * @prog: name of the builtin
+ * @builtin: function tied to builtin
+ */
 typedef struct builtin
 {
 	char *prog;

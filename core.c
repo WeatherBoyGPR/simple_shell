@@ -21,7 +21,7 @@ int main(void)
  */
 int shellcore(void)
 {
-	char *line = NULL, *prompt = "($)";
+	char *line = NULL, *prompt = "($) ";
 	char **args = NULL;
 	int stat = 0, cont[] = {1, 0}, i = 0;
 	size_t len = 0;
@@ -29,7 +29,8 @@ int shellcore(void)
 	/*signal(SIGQUIT, SIG_IGN);*/
 	while (cont[0])
 	{
-		_puts(prompt);
+		if (isatty(STDIN_FILENO))
+			_puts(prompt);
 		/*printf("ATTEMPT #%i\n", i);*/
 		/*gets input*/
 		stat = getline(&line, &len, stdin);
