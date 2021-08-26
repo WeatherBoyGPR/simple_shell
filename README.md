@@ -27,7 +27,7 @@ A simple **UNIX** command interpreter is a program that reads commands from the 
 
 To use this shell first	of all you must	clone this repository, using the next c ommand:
 
-`git clone https://github.com/isomora/simple_shell.git
+https://github.com/WeatherBoyGPR/simple_shell.git
 ## How to compile it:
 gcc -Wall -Werror -Wextra -pedantic -std=gnu89 *.c -o hsh
 
