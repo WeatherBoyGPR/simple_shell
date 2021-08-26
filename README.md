@@ -23,9 +23,6 @@ A simple **UNIX** command interpreter is a program that reads commands from the 
 + All your header files should be include guarded
 + Use system calls only when you need to ([why?]())
 
-## Flowchart:
-
-This is the [Flowchart]() that describes the process of the simple shell.
 ## Installation:
 
 To use this shell first	of all you must	clone this repository, using the next c ommand:
