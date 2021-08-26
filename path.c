@@ -9,8 +9,8 @@
 char **dpath(char *ctl)
 {
 	if (ctl == NULL)
-		return (1);
-	return (0);
+		return (NULL);
+	return (NULL);
 	/*
 	 *	char *path, *tok, *sub_dir, **dir;
 	 *	int count = 1, i = 0;
