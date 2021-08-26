@@ -6,11 +6,12 @@
  *
  * Return:
  */
+/*
 int builtin_XXXXX(char **args)
 {
 
 }
-
+*/
 /**
  * builtin_exit - will exit the shell
  * @args: arguments

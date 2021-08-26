@@ -7,7 +7,7 @@
  */
 char **dpath(char *ctl)
 {
-	printf("%s\n", ct1);
+	printf("%s\n", ctl);
 	return (0);
 /*	char *path, *tok, *sub_dir, **dir;
 	int count = 1, i = 0;
