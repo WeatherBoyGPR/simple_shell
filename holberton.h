@@ -24,6 +24,22 @@ typedef struct builtin
 	int (*builtin)(char **args);
 } builtin_t;
 
+/**
+ * struct env_list - acts as a linked list to store the environment in
+ * @title: name of environment variable
+ * @value: value stored within environment variable
+ * @next: next node in environment list
+ */
+typedef struct env_list
+{
+	char *title;
+	char *value;
+	struct env_list *next;
+} env_t;
+
+extern char **environ;
+
+
 /*shell files*/
 int shellcore(void);
 int line_read(void);
