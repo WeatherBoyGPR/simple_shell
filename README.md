@@ -31,7 +31,8 @@ To use this shell first	of all you must	clone this repository, using the next c 
 ## How to compile it:
 gcc -Wall -Werror -Wextra -pedantic -std=gnu89 *.c -o hsh
 
-
+## Flowchart:
+https://app.code2flow.com/28IRQR252oR5.pdf
 
 
 
