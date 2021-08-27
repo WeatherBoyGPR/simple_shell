@@ -46,8 +46,7 @@ int line_read(void);
 char **linecut(char *line);
 int blt_execute(char **args);
 int com_execute(char **arg);
-/*PATH*/
-char **dir_path(char *cmd);
+
 /*util1 file*/
 char *_strdup(char *str);
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
@@ -61,4 +60,11 @@ int _strcmp(char *s1, char *s2);
 
 /*builtin file*/
 int builtin_exit(char **args);
+
+/*envfunc file*/
+env_t *genv(void);
+char *gval(env_t *head, char *title);
+env_t *envt_node_end(env_t **head, const char *str);
+void free_env(env_t *head);
+
 #endif

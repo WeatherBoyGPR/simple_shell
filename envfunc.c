@@ -1,4 +1,4 @@
-#include <holberton.h>
+#include "holberton.h"
 
 /**
  * genv - will obtain the environment and assign it to a linked list
@@ -23,7 +23,7 @@ env_t *genv(void)
  *
  * Return: specified value within the environment
  */
-char *gval(env_t **head, char *title)
+char *gval(env_t *head, char *title)
 {
 	char *val;
 
