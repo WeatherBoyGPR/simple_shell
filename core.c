@@ -119,6 +119,7 @@ int blt_execute(char **args, env_t *envi)
 	int i = 0, stat = -1;
 	builtin_t builts[] = {
 		{"exit", builtin_exit},
+		{"env", builtin_env},
 		{NULL, NULL},
 	};
 

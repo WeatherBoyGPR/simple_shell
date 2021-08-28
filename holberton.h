@@ -61,6 +61,7 @@ int _strcmp(char *s1, char *s2);
 
 /*builtin file*/
 int builtin_exit(char **args, env_t *envi);
+int builtin_env(char **args, env_t *envi);
 
 /*envfunc file*/
 env_t *genv(void);
