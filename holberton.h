@@ -14,17 +14,6 @@
 #include <sys/wait.h>
 
 /**
- * struct builtin - ties together builtin names and functions
- * @prog: name of the builtin
- * @builtin: function tied to builtin
- */
-typedef struct builtin
-{
-	char *prog;
-	int (*builtin)(char **args);
-} builtin_t;
-
-/**
  * struct env_list - acts as a linked list to store the environment in
  * @title: name of environment variable
  * @value: value stored within environment variable
@@ -37,6 +26,18 @@ typedef struct env_list
 	struct env_list *next;
 } env_t;
 
+/**
+ * struct builtin - ties together builtin names and functions
+ * @prog: name of the builtin
+ * @builtin: function tied to builtin
+ */
+typedef struct builtin
+{
+	char *prog;
+	int (*builtin)(char **args, env_t *envi);
+} builtin_t;
+
+
 extern char **environ;
 
 
@@ -44,8 +45,8 @@ extern char **environ;
 int shellcore(void);
 int line_read(void);
 char **linecut(char *line);
-int blt_execute(char **args);
-int com_execute(char **arg);
+int blt_execute(char **args, env_t *envi);
+int com_execute(char **arg, env_t *envi);
 
 /*util1 file*/
 char *_strdup(char *str);
@@ -59,12 +60,13 @@ int _puts(char *str);
 int _strcmp(char *s1, char *s2);
 
 /*builtin file*/
-int builtin_exit(char **args);
+int builtin_exit(char **args, env_t *envi);
 
 /*envfunc file*/
 env_t *genv(void);
 char *gval(env_t *head, char *title);
 env_t *envt_node_end(env_t **head, const char *str);
 void free_env(env_t *head);
+void print_env(env_t *envi);
 
 #endif

@@ -108,3 +108,27 @@ void free_env(env_t *head)
 		head = hold;
 	}
 }
+
+/**
+ * print_env - will print the environment
+ * @envi - linked list the environment is stored in
+ *
+ * Return: nothing
+ */
+void print_env(env_t *envi)
+{
+	while (envi != NULL)
+	{
+		if (envi->title != NULL)
+		{
+			_puts(envi->title);
+			if (envi->value)
+			{
+				_putchar('=');
+				_puts(envi->value);
+			}
+			_putchar('\n');
+		}
+		envi = envi->next;
+	}
+}

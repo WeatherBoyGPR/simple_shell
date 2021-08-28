@@ -25,7 +25,9 @@ int shellcore(void)
 	char **args = NULL;
 	int stat = 0, cont[] = {1, 0}, i = 0;
 	size_t len = 0;
+	env_t *envi = NULL;
 
+	envi = genv();
 	/*signal(SIGQUIT, SIG_IGN);*/
 	while (cont[0])
 	{
@@ -36,6 +38,8 @@ int shellcore(void)
 		stat = getline(&line, &len, stdin);
 		if (stat < 0)
 		{
+			free_env(envi);
+			envi = NULL;
 			free(line);
 			cont[0] = 0;
 		}
@@ -44,7 +48,7 @@ int shellcore(void)
 			/*segments input*/
 			args = linecut(line);
 			/*func to take care of builtins*/
-			stat = com_execute(args);
+			stat = com_execute(args, envi);
 			i++;
 			if (line != NULL)
 				free(line);
@@ -55,6 +59,8 @@ int shellcore(void)
 			line = NULL;
 		}
 	}
+	if (envi != NULL)
+		free_env(envi);
 	return (stat);
 }
 
@@ -108,7 +114,7 @@ char **linecut(char *line)
  *
  * Return: status number of called function, -1 on failure
  */
-int blt_execute(char **args)
+int blt_execute(char **args, env_t *envi)
 {
 	int i = 0, stat = -1;
 	builtin_t builts[] = {
@@ -120,7 +126,7 @@ int blt_execute(char **args)
 	{
 		if (!(_strcmp(args[0], builts[i].prog)))
 		{
-			stat = (builts[i].builtin)(args);
+			stat = (builts[i].builtin)(args, envi);
 			break;
 		}
 		i++;
@@ -135,23 +141,24 @@ int blt_execute(char **args)
  *
  * Return: status number of executed program
  */
-int com_execute(char **arg)
+int com_execute(char **arg, env_t *envi)
 {
 	pid_t pcs;
 	int stat = 0;
 
-	stat = blt_execute(arg);
+	stat = blt_execute(arg, envi);
 	if (stat < 0)
 	{
 
 		pcs = fork();
 		if (!pcs)
 		{
-			stat = execve(arg[0], arg, NULL);
+			stat = execve(arg[0], arg, environ);
 			if (stat == -1)
 				perror("No such file or directory\n");
 			free(arg[0]);
 			free(arg);
+			free_env(envi);
 			exit(stat);
 		}
 		else if (pcs < 0)
